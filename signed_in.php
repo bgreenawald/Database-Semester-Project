@@ -41,7 +41,7 @@ mysqli_close($con);
 		<!-- Wrapper -->
 			<div id="wrapper">
         <ul class="actions">
-          <li><a href="example.php" class="button special">Special</a></li>
+          <li><a href="query.php" class="button special">Search the Database</a></li>
           <li><a href="example.php" class="button">Default</a></li>
         </ul>
 
