@@ -38,7 +38,7 @@ if (mysqli_connect_errno())
   }
 
 
-$sql="SELECT * FROM performer NATURAL JOIN play NATURAL JOIN shows NATURAL JOIN venue NATURAL JOIN is_in NATURAL JOIN location NATURAL JOIN sells NATURAL JOIN tickets WHERE zip_code LIKE '%$q%'";
+$sql="SELECT * FROM performer NATURAL JOIN play NATURAL JOIN shows NATURAL JOIN venue NATURAL JOIN is_in NATURAL JOIN location WHERE zip_code LIKE '%$q%' ORDER BY performer_name";
 $result = mysqli_query($con,$sql);
 
 echo "<table>
@@ -48,7 +48,6 @@ echo "<table>
 <th>Venue Name</th>
 <th>Date</th>
 <th>Start Time</th>
-<th>Ticket Price</th>
 </tr>";
 while($row = mysqli_fetch_array($result)) {
     echo "<tr>";
@@ -57,7 +56,6 @@ while($row = mysqli_fetch_array($result)) {
     echo "<td>" . $row['venue_name'] . "</td>";
     echo "<td>" . $row['date_played'] . "</td>";
     echo "<td>" . $row['doors_open'] . "</td>";
-    echo "<td>" . $row['price'] . "</td>";
     echo "</tr>";
 }
 echo "</table>";

@@ -108,6 +108,7 @@ INSERT INTO performer VALUES ('Kanye West', 1, 'Rap', 1990);
 INSERT INTO performer VALUES ('The ChainSmokers', 2, 'Pop', 2008);
 
 INSERT INTO location VALUES ('22903', "Virginia", "Charlottesville");
+INSERT INTO location VALUES ('22904', "Virginia", "Charlottesville");
 
 INSERT INTO tour VALUES('More Life Tour', 'Aubrey', 'Graham', '20170412', '20170431');
 INSERT INTO tour VALUES('Life of Pablo', 'Jim', 'Scott', '20170412', '20170331');
@@ -128,12 +129,15 @@ INSERT INTO shows VALUES('20170412', '23:13:00', 'The Jefferson');
 
 --Relationships--
 INSERT INTO is_in VALUES('The Verizon Center', '22903');
+INSERT INTO is_in VALUES('The Jefferson', '22904');
 
 INSERT INTO contain VALUES('More Life Tour', '20170322', '23:13:00', 'The Verizon Center');
 
 INSERT INTO go_on VALUES('Drake', 'More Life Tour');
+INSERT INTO go_on VALUES('Kanye West', 'Life of Pablo');
 
 INSERT INTO play VALUES('Drake', '20170322', '23:13:00', 'The Verizon Center');
+INSERT INTO play VALUES('Kanye West', '20170412', '23:13:00', 'The Jefferson');
 
 INSERT INTO sells VALUES(3, '20170322', '23:13:00', 'The Verizon Center');
 INSERT INTO sells VALUES(4, '20170322', '23:13:00', 'The Verizon Center');

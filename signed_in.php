@@ -15,6 +15,7 @@ if (mysqli_connect_errno())
   else {
     $_SESSION["username"] = $USERNAME;
     $_SESSION["password"] = $PASSWORD;
+    $_SESSION["timestamp"] = time();
   }
 mysqli_close($con);
 

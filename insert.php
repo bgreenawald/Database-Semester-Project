@@ -18,7 +18,6 @@ $tour_name = isset($_POST["tour-name"]) ? mysqli_real_escape_string($conn, $_POS
 $date = isset($_POST["date"]) ? mysqli_real_escape_string($conn, $_POST["date"]) : "";
 $time = isset($_POST["time"]) ? mysqli_real_escape_string($conn, $_POST["time"]) : "";
 
-echo "tour name is " . $tour_name;
 ?>
 
 <!DOCTYPE HTML>
