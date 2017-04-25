@@ -15,9 +15,11 @@ if (mysqli_connect_errno())
   else {
     $_SESSION["username"] = $USERNAME;
     $_SESSION["password"] = $PASSWORD;
+		$_SESSION['login'] = true;
     $_SESSION["timestamp"] = time();
   }
 mysqli_close($con);
+header('Location: index.html');
 
 ?>
 
