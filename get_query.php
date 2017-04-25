@@ -1,22 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-table, td, th {
-    border: 1px solid black;
-    padding: 5px;
-}
-
-th {text-align: left;}
-</style>
-</head>
-<body>
-
 <?php
 $q = $_GET['q'];
 
@@ -61,5 +42,30 @@ while($row = mysqli_fetch_array($result)) {
 echo "</table>";
 mysqli_close($con);
 ?>
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, td, th {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+th {text-align: left;}
+</style>
+</head>
+<body>
+
+
 </body>
 </html>
