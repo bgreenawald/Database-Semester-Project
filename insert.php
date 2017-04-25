@@ -10,13 +10,13 @@ if (!isset($USERNAME) || !isset($PASSWORD)) {
 	die();
 }
 
-$conn = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
+$con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
 
-$performer_name = isset($_POST["artist-name"]) ? mysqli_real_escape_string($conn, $_POST["artist-name"]) : "";
-$venue_name = isset($_POST["venue-name"]) ? mysqli_real_escape_string($conn, $_POST["venue-name"]) : "";
-$tour_name = isset($_POST["tour-name"]) ? mysqli_real_escape_string($conn, $_POST["tour-name"]) : NULL;
-$date = isset($_POST["date"]) ? mysqli_real_escape_string($conn, $_POST["date"]) : "";
-$time = isset($_POST["time"]) ? mysqli_real_escape_string($conn, $_POST["time"]) : "";
+$performer_name = isset($_POST["artist-name"]) ? mysqli_real_escape_string($con, $_POST["artist-name"]) : "";
+$venue_name = isset($_POST["venue-name"]) ? mysqli_real_escape_string($con, $_POST["venue-name"]) : "";
+$tour_name = isset($_POST["tour-name"]) ? mysqli_real_escape_string($con, $_POST["tour-name"]) : NULL;
+$date = isset($_POST["date"]) ? mysqli_real_escape_string($con, $_POST["date"]) : "";
+$time = isset($_POST["time"]) ? mysqli_real_escape_string($con, $_POST["time"]) : "";
 
 ?>
 
@@ -48,30 +48,40 @@ $time = isset($_POST["time"]) ? mysqli_real_escape_string($conn, $_POST["time"])
 				<!-- Main -->
 					<div id="main">
 						<?php
-							$sql1 = "INSERT INTO shows VALUES('$date', '$time', '$venue_name')" ;
-							$sql2 = "INSERT INTO play VALUES('$performer_name', '$date', '$time', '$venue_name')" ;
-							$query1 = $conn->query($sql1);
-							$query2 = $conn->query($sql2);
+							$sql1 = $con->prepare("INSERT INTO shows VALUES(?, ?, ?)");
+							$sql1->bind_param("sss", $date, $time, $venue_name);
+							$query1 = $sql1->execute();
+							
+							$sql2 = $con->prepare("INSERT INTO play VALUES(?, ?, ?, ?)");
+							$sql2->bind_param("ssss", $performer_name, $date, $time, $venue_name);
+							$query2 = $sql2->execute();
+
 							if ($query1 == TRUE && $query2 == TRUE) {
-  								echo "New show successfully added";
+  								echo "New show successfully added <br>";
 							} else if($query1 == TRUE && $query2 == FALSE){
-								$conn->query("DELETE FROM shows WHERE date_played = '$date' AND doors_open = '$time' AND venue_name = '$venue_name'");
-								echo "Error: " . $sql2 . "<br>" . $conn->error;
+								$sql2_1 = $con->prepare("DELETE FROM shows WHERE date_played = ? AND doors_open = ? AND venue_name = ?");
+								$sql2_1->bind_param("sss", $date, $time, $venue_name);
+								$sql2_1->execute();
+								echo "Could not find the given artist" . "<br>";
+								echo"Error: " . $sql2->error . "<br>";
 							}else {
-							    echo "Error: " . $sql1 . "<br>" . $conn->error;
-							    echo "Error: " . $sql2 . "<br>" . $conn->error;
+								echo "Could not add show" . "<br>"; 
+							    echo "Error: " . $sql1->error . "<br>";
 							}
 
 							if(isset($tour_name) && $tour_name != ""){
-								$sql3 = "INSERT INTO contain VALUE('$tour_name', '$date', '$time', '$venue_name')";
-								if($conn->query($sql3) == TRUE){
-									echo "Show added to tour";
+								$sql3 = $con->prepare("INSERT INTO contain VALUE(?, ?, ?, ?)");
+								$sql3->bind_param("ssss", $tour_name, $date, $time, $venue_name);
+								$query3 = $sql3->execute();
+								if($query3 == TRUE){
+									echo "Show added to tour." . "<br>";
 								}else{
-									echo"Error: " . $sql3 . "<br>" . $conn->error;
+									echo "Could not add show to tour." . "<br>";
+									echo "Error: " . $sql3->error . "<br>";
 								}
 							}
 
-							mysqli_close($conn);
+							mysqli_close($con);
 
 
 						?>

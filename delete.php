@@ -46,10 +46,11 @@ $time = isset($_POST["time"]) ? mysqli_real_escape_string($conn, $_POST["time"])
 				<!-- Main -->
 					<div id="main">
 						<?php
-							$sql1 = "DELETE FROM shows WHERE date_played = '$date' AND doors_open = '$time' AND venue_name = '$venue_name'";
-							$query1 = $conn->query($sql1);
+							$sql1 = $conn->prepare("DELETE FROM shows WHERE date_played = ? AND doors_open = ? AND venue_name = ?");
+							$sql1->bind_param("sss", $date, $time, $venue_name);
+							$query1 = $sql1->execute();
 							if ($query1 == TRUE) {
-  								echo "Show successfully deleted";
+  								echo "If existed, the show was successfully deleted";
 							}else {
 							    echo "Error: " . $sql1 . "<br>" . $conn->error;
 							}

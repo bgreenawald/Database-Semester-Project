@@ -18,7 +18,7 @@ th {text-align: left;}
 <body>
 
 <?php
-$q = $_GET['q'];
+
 
 session_start();
 $SERVER = 'stardock.cs.virginia.edu';
@@ -27,6 +27,7 @@ $USERNAME = $_SESSION["username"];
 $PASSWORD = $_SESSION["password"];
 
 $con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
+
 
 // Check connection
 if (mysqli_connect_errno())
@@ -37,21 +38,44 @@ if (mysqli_connect_errno())
     
   }
 
+$q = mysqli_real_escape_string($con, $_GET['q']);
+$q = "%{$q}%";
+$p = $q;
 
-$sql="SELECT * FROM performer NATURAL JOIN go_on NATURAL JOIN tour WHERE tour_manager_first_name LIKE '%$q%' OR tour_manager_last_name LIKE '%$q%'";
-$result = mysqli_query($con,$sql);
+$sql1 = $con->prepare("SELECT * FROM performer NATURAL JOIN go_on NATURAL JOIN tour WHERE tour_manager_first_name LIKE ? OR tour_manager_last_name LIKE ?");
+
+$sql1->bind_param("ss", $q, $p);
+$sql1->execute();
+
+$meta = $sql1->result_metadata();
+
+while ($field = $meta->fetch_field()) {
+  $parameters[] = &$row[$field->name];
+}
+
+call_user_func_array(array($sql1, 'bind_result'), $parameters);
+
+while ($sql1->fetch()) {
+  foreach($row as $key => $val) {
+    $x[$key] = $val;
+  }
+  $results[] = $x;
+}
 
 echo "<table>
 <tr>
-<th>Manager Name</th>
 <th>Tour Name</th>
-<th>Start Date</th>
-<th>End Date</th>
+<th>Manager First Name</th>
+<th>Manager Last Name</th>
+<th>Date Started</th>
+<th>Date Ended</th>
 </tr>";
-while($row = mysqli_fetch_array($result)) {
+foreach($results as $row) {
+
     echo "<tr>";
-    echo "<td>" . $row['tour_manager_first_name'] . " " . $row['tour_manager_last_name'] . "</td>";
-    echo "<td>" . $row['performer_name'] . "</td>";
+    echo "<td>" . $row['tour_name'] . "</td>";
+    echo "<td>" . $row['tour_manager_first_name'] . "</td>";
+    echo "<td>" . $row['tour_manager_last_name'] . "</td>";
     echo "<td>" . $row['date_started'] . "</td>";
     echo "<td>" . $row['date_ended'] . "</td>";
     echo "</tr>";

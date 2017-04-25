@@ -18,7 +18,7 @@ th {text-align: left;}
 <body>
 
 <?php
-$q = $_GET['q'];
+
 
 session_start();
 $SERVER = 'stardock.cs.virginia.edu';
@@ -27,6 +27,7 @@ $USERNAME = $_SESSION["username"];
 $PASSWORD = $_SESSION["password"];
 
 $con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
+
 
 // Check connection
 if (mysqli_connect_errno())
@@ -37,9 +38,28 @@ if (mysqli_connect_errno())
     
   }
 
+$q = mysqli_real_escape_string($con, $_GET['q']);
+$q = "%{$q}%";
 
-$sql="SELECT * FROM performer NATURAL JOIN play NATURAL JOIN shows NATURAL JOIN venue NATURAL JOIN is_in NATURAL JOIN location WHERE zip_code LIKE '%$q%'";
-$result = mysqli_query($con,$sql);
+$sql1 = $con->prepare("SELECT * FROM performer NATURAL JOIN play NATURAL JOIN shows NATURAL JOIN venue NATURAL JOIN is_in NATURAL JOIN location WHERE zip_code LIKE ?");
+
+$sql1->bind_param("s", $q);
+$sql1->execute();
+
+$meta = $sql1->result_metadata();
+
+while ($field = $meta->fetch_field()) {
+  $parameters[] = &$row[$field->name];
+}
+
+call_user_func_array(array($sql1, 'bind_result'), $parameters);
+
+while ($sql1->fetch()) {
+  foreach($row as $key => $val) {
+    $x[$key] = $val;
+  }
+  $results[] = $x;
+}
 
 echo "<table>
 <tr>
@@ -50,7 +70,7 @@ echo "<table>
 <th>Start Time</th>
 <th>Percent Tickets</th>
 </tr>";
-while($row = mysqli_fetch_array($result)) {
+foreach($results as $row) {
     $sql2 = "CALL GET_PERCENT_TICKETS_SOLD('$row[date_played]', '$row[doors_open]', '$row[venue_name]', @p3)";
     $result2 = mysqli_query($con, $sql2);
 
