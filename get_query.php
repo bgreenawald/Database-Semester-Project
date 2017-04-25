@@ -53,6 +53,7 @@ echo "<table>
 while($row = mysqli_fetch_array($result)) {
     $sql2 = "CALL GET_PERCENT_TICKETS_SOLD('$row[date_played]', '$row[doors_open]', '$row[venue_name]', @p3)";
     $result2 = mysqli_query($con, $sql2);
+
     mysqli_close($con);
     $con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
 
