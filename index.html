@@ -34,6 +34,8 @@
 							<li><a href="#first">Services</a></li>
 							<!--<li><a href="#second">Second Section</a></li>-->
 							<li><a href="#cta">Sign In</a></li>
+							<li><a href="delete_show.html">Delete Show</a><li>
+							<li><a href="export.php">Export</a><li>
 						</ul>
 					</nav>
 
@@ -148,9 +150,12 @@
 								</header>
 								<footer class="major">
 									<ul class="actions">
-										<li><a href="sign_in.html" class="button special">Log In</a></li>
-                    <li><a href="sign_out.php" class="button special">Log Out</a></li>
-                    <li><a href="insert_show.php" class="button">Insert Show</a></li>
+                    						<?php if(!isset($_SESSION["username"]) || !isset($_SESSION["password"])) : ?>
+                    							<li><a href="sign_in.html" class="button special">Log In</a></li>
+											<?php else : ?>
+    											<li><a href="sign_out.php" class="button special">Log Out</a></li>
+											<?php endif; ?>
+                    					<li><a href="insert_show.php" class="button">Insert Show</a></li>
 									</ul>
 								</footer>
 							</section>
