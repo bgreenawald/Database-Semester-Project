@@ -5,6 +5,11 @@ $DATABASE = 'cs4750s17bhg5yd';
 $USERNAME = $_SESSION["username"];
 $PASSWORD = $_SESSION["password"];
 
+if (!isset($USERNAME) || !isset($PASSWORD)) {
+	header("Location: sign_in.php");
+	die();
+}
+
 $con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
 $filename = "empdata.json";
 // Check connection
@@ -22,7 +27,7 @@ header('Content-Type: application/json');
 $tables = array('contain', 'go_on', 'is_in', 'location', 'performer', 'play', 'sells', 'shows', 'tickets', 'tour', 'venue');
 
 foreach($tables as $name){
-	echo "Dumping date for table ", $name, PHP_EOL;
+	echo "// Dumping date for table ", $name, PHP_EOL;
 
 	$sql = "select * from $name";
 	$result = mysqli_query($con, $sql) or die("Error in Selecting " . mysqli_error($con));
