@@ -24,7 +24,7 @@ if (mysqli_connect_errno())
     $_SESSION["timestamp"] = time();
   }
 mysqli_close($con);
-header('Location: index.html');
+header('Location: index.php');
 
 ?>
 

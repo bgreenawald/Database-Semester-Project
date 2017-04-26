@@ -87,7 +87,7 @@ if($sql1){
     echo "</table>";
   }
 }else{
-  echo "Invalid Credentials to Search";
+  echo "Invalid Credentials to Search";h
 }
 mysqli_close($con);
 ?>

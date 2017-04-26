@@ -40,7 +40,7 @@ $time_new = isset($_POST["time_new"]) ? mysqli_real_escape_string($conn, $_POST[
 		<!-- Wrapper -->
 			<div id="wrapper">
 		        <ul class="actions">
-		          <li><a href="index.html" class="button">Home</a></li>
+		          <li><a href="index.php" class="button">Home</a></li>
 		          <li><a href="update_show.php" class="button">Back To Update</a></li>
 		        </ul>
 

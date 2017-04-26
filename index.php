@@ -21,10 +21,17 @@
 
 				<!-- Header -->
 					<header id="header" class="alt">
+
 						<span class="logo"><img src="images/logo.svg" alt="" /></span>
 						<h1>Live Music Database</h1>
 						<p>Just Another Totally Rad Concert Tracker<br />
 						Built by Sarah Barkley, Ben Greenawald, Caroline Holmes, and Ryan Polsky</p>
+
+						<?php
+						if(isset($_REQUEST['msg'])){
+							echo $_REQUEST['msg'];
+							}
+	  				?>
 					</header>
 
 				<!-- Nav -->

@@ -1,11 +1,27 @@
 <?php
 
 session_start();
-if (!isset($_SESSION["username"]) || !isset($_SESSION["password"])) {
+$SERVER = 'stardock.cs.virginia.edu';
+$DATABASE = 'cs4750s17bhg5yd';
+$USERNAME = $_SESSION["username"];
+$PASSWORD = $_SESSION["password"];
+
+if (!isset($USERNAME) || !isset($PASSWORD)) {
 	header("Location: sign_in.html");
 	die();
 }
 
+$conn = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
+
+
+$sql1 = $conn->prepare("UPDATE shows SET doors_open = ? WHERE date_played = ? AND doors_open = ? AND venue_name = ?");
+	if(!$sql1){
+		mysqli_close($conn);
+	  	$message = urlencode("Invalid Credentials to View this Page");
+	  	header('Location: index.php?msg='.$message);
+	  	exit();
+	}
+mysqli_close($conn);
 ?>
 
 <!DOCTYPE HTML>
@@ -37,7 +53,7 @@ if (!isset($_SESSION["username"]) || !isset($_SESSION["password"])) {
 		<div id="main">
 			<nav id="nav">
 			<ul>
-							<li><a href="index.html">Home</a></li>
+							<li><a href="index.php">Home</a></li>
 							<li><a href="query.php">Search Shows</a><li>
 							<li><a href="delete_show.php">Delete Show</a><li>
 							<li><a href="insert_show.php">Insert Show</a></li>

@@ -46,7 +46,7 @@ $time = isset($_POST["time"]) ? mysqli_real_escape_string($con, $_POST["time"]) 
 			<div id="wrapper" style="padding: 20px;height: 1000px" >
 		        <ul class="actions" >
 		          <li><a href="insert_show.php" class="button special">Back to Insert</a></li>
-		          <li><a href="index.html" class="button">Home</a></li>
+		          <li><a href="index.php" class="button">Home</a></li>
 		        </ul>
 
 				<!-- Main -->

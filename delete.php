@@ -39,7 +39,7 @@ $time = isset($_POST["time"]) ? mysqli_real_escape_string($conn, $_POST["time"])
 		<!-- Wrapper -->
 			<div id="wrapper">
 		        <ul class="actions">
-		          <li><a href="index.html" class="button">Home</a></li>
+		          <li><a href="index.php" class="button">Home</a></li>
 		          <li><a href="delete_show.php" class="button">Back To Delete</a></li>
 		        </ul>
 

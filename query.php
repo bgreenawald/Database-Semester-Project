@@ -116,7 +116,7 @@ function showTour(str) {
     </header>
       <nav id="nav">
       <ul>
-              <li><a href="index.html">Home</a></li>
+              <li><a href="index.php">Home</a></li>
               <li><a href="query.php">Search Shows</a><li>
               <li><a href="delete_show.php">Delete Show</a><li>
               <li><a href="insert_show.php">Insert Show</a></li>
