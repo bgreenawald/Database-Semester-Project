@@ -1,9 +1,27 @@
+<?php
+
+session_start();
+if (!isset($_SESSION["username"]) || !isset($_SESSION["password"])) {
+	header("Location: sign_in.html");
+	die();
+}
+
+$SERVER = 'stardock.cs.virginia.edu';
+$DATABASE = 'cs4750s17bhg5yd';
+$USERNAME = $_SESSION["username"];
+$PASSWORD = $_SESSION["password"];
+
+?>
+
+
 <!DOCTYPE HTML>
 
 <html>
 
+	
+
 <head>
-	<title>Delete Show</title>
+	<title>Elements - Stellar by HTML5 UP</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -20,7 +38,8 @@
 
 		<!-- Header -->
 		<header id="header">
-			<h1>Delete a Show</h1>
+			<h1>Add a Show</h1>
+			<br>
 		</header>
 
 		<!-- Main -->
@@ -31,13 +50,22 @@
 
 
 				<section>
-					<h2>Form</h2>
-					<form method="post" action="delete.php">
+					
+					<form method="post" action="insert.php">
 						<div class="row uniform">
+							<h4>Artist Name</h4>
+							<div class="12u 12u$(medium)" style="padding-top: 0px">
+								<input type="text" name="artist-name" id="artist-name" required />
+							</div>
 							<h4>Venue</h4>
 							<div class="12u 12u$(medium)" style="padding-top: 0px">
-								<input type="text" name="venue-name" id="venue-name" placeholder="Venue" required />
+								<input type="text" name="venue-name" id="venue-name" required />
 							</div>
+							<h4>Name of Tour (if part of a tour)</h4>
+							<div class="12u 12u$(xsmall)" style="padding-top: 0px">
+								<input type="text" name="tour-name" id="tour-name" />
+							</div>
+
 							<h4>Date</h4>
 							<div class="12u 12u$(xsmall)" style="padding-top: 0px">
 								<input type="date" name="date" id="date" required />
@@ -50,7 +78,7 @@
 
 							<div class="12u$">
 								<ul class="actions">
-									<li><input type="submit" value="Delete Show" class="special" /></li>
+									<li><input type="submit" value="Add Show" class="special" /></li>
 									<li><input type="reset" value="Clear" /></li>
 								</ul>
 							</div>

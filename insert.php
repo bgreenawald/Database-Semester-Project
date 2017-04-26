@@ -1,14 +1,18 @@
 <?php
 session_start();
+
+//redirect if not logged in
+if (!isset($_SESSION["username"]) || !isset($_SESSION["password"])) {
+	header("Location: sign_in.html");
+	die();
+}
+
 $SERVER = 'stardock.cs.virginia.edu';
 $DATABASE = 'cs4750s17bhg5yd';
 $USERNAME = $_SESSION["username"];
 $PASSWORD = $_SESSION["password"];
 
-if (!isset($USERNAME) || !isset($PASSWORD)) {
-	header("Location: sign_in.html");
-	die();
-}
+
 
 $con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
 
