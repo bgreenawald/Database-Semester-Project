@@ -62,25 +62,27 @@ while ($sql1->fetch()) {
   $results[] = $x;
 }
 
-echo "<table>
-<tr>
-<th>Tour Name</th>
-<th>Manager First Name</th>
-<th>Manager Last Name</th>
-<th>Date Started</th>
-<th>Date Ended</th>
-</tr>";
-foreach($results as $row) {
+if(isset($results)){
+  echo "<table>
+  <tr>
+  <th>Tour Name</th>
+  <th>Manager First Name</th>
+  <th>Manager Last Name</th>
+  <th>Date Started</th>
+  <th>Date Ended</th>
+  </tr>";
+  foreach($results as $row) {
 
-    echo "<tr>";
-    echo "<td>" . $row['tour_name'] . "</td>";
-    echo "<td>" . $row['tour_manager_first_name'] . "</td>";
-    echo "<td>" . $row['tour_manager_last_name'] . "</td>";
-    echo "<td>" . $row['date_started'] . "</td>";
-    echo "<td>" . $row['date_ended'] . "</td>";
-    echo "</tr>";
+      echo "<tr>";
+      echo "<td>" . $row['tour_name'] . "</td>";
+      echo "<td>" . $row['tour_manager_first_name'] . "</td>";
+      echo "<td>" . $row['tour_manager_last_name'] . "</td>";
+      echo "<td>" . $row['date_started'] . "</td>";
+      echo "<td>" . $row['date_ended'] . "</td>";
+      echo "</tr>";
+  }
+  echo "</table>";
 }
-echo "</table>";
 mysqli_close($con);
 ?>
 </body>
