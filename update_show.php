@@ -66,21 +66,16 @@ mysqli_close($conn);
 
 
 				<section>
-					<h2>Form</h2>
+					<h2>Update</h2>
 					<form method="post" action="update.php">
 						<div class="row uniform">
 							<h4>Venue</h4>
 							<div class="12u 12u$(medium)" style="padding-top: 0px">
 								<input type="text" name="venue-name" id="venue-name" placeholder="Venue" required />
 							</div>
-							<h4>Old Date</h4>
+							<h4>Date</h4>
 							<div class="12u 12u$(xsmall)" style="padding-top: 0px">
 								<input type="date" name="date" id="date" required />
-							</div>
-
-							<h4>New Date (Enter old date if unchanged)</h4>
-							<div class="12u 12u$(xsmall)" style="padding-top: 0px">
-								<input type="date" name="date_new" id="date_new" required/>
 							</div>
 
 							<h4>Old Start Time</h4>

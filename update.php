@@ -15,7 +15,6 @@ $conn = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
 $venue_name = isset($_POST["venue-name"]) ? mysqli_real_escape_string($conn, $_POST["venue-name"]) : "";
 $date = isset($_POST["date"]) ? mysqli_real_escape_string($conn, $_POST["date"]) : "";
 $time = isset($_POST["time"]) ? mysqli_real_escape_string($conn, $_POST["time"]) : "";
-$date_new = isset($_POST["date_new"]) ? mysqli_real_escape_string($conn, $_POST["date_new"]) : "";
 $time_new = isset($_POST["time_new"]) ? mysqli_real_escape_string($conn, $_POST["time_new"]) : "";
 
 ?>
@@ -70,9 +69,9 @@ $time_new = isset($_POST["time_new"]) ? mysqli_real_escape_string($conn, $_POST[
 							}
 							else{
 								$sql2->close();
-								$sql1 = $conn->prepare("UPDATE shows SET doors_open = ?, date_played = ? WHERE date_played = ? AND doors_open = ? AND venue_name = ?");
+								$sql1 = $conn->prepare("UPDATE shows SET doors_open = ? WHERE date_played = ? AND doors_open = ? AND venue_name = ?");
 								if($sql1){
-									$sql1->bind_param("sssss", $time_new, $date_new, $date, $time, $venue_name);
+									$sql1->bind_param("ssss", $time_new, $date, $time, $venue_name);
 									$query1 = $sql1->execute();
 									if ($query1 == TRUE) {
 		  								echo "The show was successfully updated";
