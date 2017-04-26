@@ -49,6 +49,7 @@ $PASSWORD = $_SESSION["password"];
 							<li><a href="delete_show.html">Delete Show</a><li>
 							<li><a href="export.php">Export</a><li>
 							<li><a href="query.php">Search Shows</a><li>
+							<li><a href="update_show.html">Update Show</a></li>
 						</ul>
 					</nav>
 		<!-- Main -->
