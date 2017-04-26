@@ -6,7 +6,7 @@ $USERNAME = $_SESSION["username"];
 $PASSWORD = $_SESSION["password"];
 
 $con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
-
+$filename = "empdata.json";
 // Check connection
 if (mysqli_connect_errno())
   {
@@ -16,6 +16,8 @@ if (mysqli_connect_errno())
     
   }
 
+header('Content-Disposition: attachment; filename=data.json');
+header('Content-Type: application/json');
 
 $tables = array('contain', 'go_on', 'is_in', 'location', 'performer', 'play', 'sells', 'shows', 'tickets', 'tour', 'venue');
 
@@ -36,19 +38,6 @@ foreach($tables as $name){
 echo json_encode($emparray);
 echo PHP_EOL;
 }
-
-
-$filename='empdata.json';
-
-
-header("Cache-Control: public");
-header("Content-Description: File Transfer");
-header("Content-Length: ". filesize("$filename").";");
-header("Content-Disposition: attachment; filename=$filename");
-header("Content-Type: application/octet-stream; "); 
-header("Content-Transfer-Encoding: binary");
-
-#echo json_encode($emparray);
 
 mysqli_close($con);
 

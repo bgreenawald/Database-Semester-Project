@@ -67,10 +67,8 @@ $time = isset($_POST["time"]) ? mysqli_real_escape_string($con, $_POST["time"]) 
 								$sql2_1->bind_param("sss", $date, $time, $venue_name);
 								$sql2_1->execute();
 								echo "Could not find the given artist" . "<br>";
-								echo"Error: " . $sql2->error . "<br>";
 							}else {
 								echo "Could not add show" . "<br>"; 
-							    echo "Error: " . $sql1->error . "<br>";
 							}
 
 							if(isset($tour_name) && $tour_name != ""){
@@ -81,7 +79,6 @@ $time = isset($_POST["time"]) ? mysqli_real_escape_string($con, $_POST["time"]) 
 									echo "Show added to tour." . "<br>";
 								}else{
 									echo "Could not add show to tour." . "<br>";
-									echo "Error: " . $sql3->error . "<br>";
 								}
 							}
 

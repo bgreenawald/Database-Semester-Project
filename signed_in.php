@@ -1,5 +1,5 @@
 <?php
-session_start();
+ob_start();
 $SERVER = 'stardock.cs.virginia.edu';
 $DATABASE = 'cs4750s17bhg5yd';
 $USERNAME = $_POST["username"];
@@ -10,9 +10,13 @@ $con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
 // Check connection
 if (mysqli_connect_errno())
   {
-  $error = "Failed to connect to MySQL: " . mysqli_connect_error();
+  //$error = "Failed to connect to MySQL: " . mysqli_connect_error();
+  	mysqli_close($con);
+  	header('Location: sign_in.html');
+  	exit();
   }
   else {
+  	session_start();
     $_SESSION["username"] = $USERNAME;
     $_SESSION["password"] = $PASSWORD;
 		$_SESSION['login'] = true;
