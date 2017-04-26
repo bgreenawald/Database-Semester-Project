@@ -38,7 +38,7 @@ $PASSWORD = $_SESSION["password"];
 
 		<!-- Header -->
 		<header id="header">
-			<h1>Add a Show</h1>
+			<h1>Insert Show</h1>
 			<br>
 		</header>
 		<nav id="nav">
