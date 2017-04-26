@@ -1,3 +1,13 @@
+<?php
+
+session_start();
+if (!isset($_SESSION["username"]) || !isset($_SESSION["password"])) {
+	header("Location: sign_in.html");
+	die();
+}
+
+?>
+
 <!DOCTYPE HTML>
 
 <html>
@@ -20,7 +30,7 @@
 
 		<!-- Header -->
 		<header id="header">
-			<h1>Delete a Show</h1>
+			<h1>Update a Show</h1>
 		</header>
 
 		<!-- Main -->
@@ -28,12 +38,11 @@
 			<nav id="nav">
 			<ul>
 							<li><a href="index.html">Home</a></li>
-							
-							<!--<li><a href="#second">Second Section</a></li>-->
-							<li><a href="insert_show.php">Insert Show</a><li>
-							<li><a href="export.php">Export</a><li>
 							<li><a href="query.php">Search Shows</a><li>
-							<li><a href="update_show.html">Update Show</a></li>
+							<li><a href="delete_show.php">Delete Show</a><li>
+							<li><a href="insert_show.php">Insert Show</a></li>
+							<li><a href="update_show.php">Update Show</a></li>
+							
 						</ul>
 						</nav>
 			<!-- Content -->
@@ -42,7 +51,7 @@
 
 				<section>
 					<h2>Form</h2>
-					<form method="post" action="delete.php">
+					<form method="post" action="update.php">
 						<div class="row uniform">
 							<h4>Venue</h4>
 							<div class="12u 12u$(medium)" style="padding-top: 0px">
@@ -53,14 +62,19 @@
 								<input type="date" name="date" id="date" required />
 							</div>
 
-							<h4>Start Time</h4>
+							<h4>Old Start Time</h4>
 							<div class="12u 12u$(xsmall)" style="padding-top: 0px">
 								<input type="time" name="time" id="time" required/>
 							</div>
 
+							<h4>New Start Time</h4>
+							<div class="12u 12u$(xsmall)" style="padding-top: 0px">
+								<input type="time" name="time_new" id="time_new" required/>
+							</div>
+
 							<div class="12u$">
 								<ul class="actions">
-									<li><input type="submit" value="Delete Show" class="special" /></li>
+									<li><input type="submit" value="Update Show" class="special" /></li>
 									<li><input type="reset" value="Clear" /></li>
 								</ul>
 							</div>

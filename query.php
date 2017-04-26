@@ -117,12 +117,10 @@ function showTour(str) {
       <nav id="nav">
       <ul>
               <li><a href="index.html">Home</a></li>
-              
-              <!--<li><a href="#second">Second Section</a></li>-->
-              <li><a href="insert_show.php">Insert Show</a><li>
-              <li><a href="delete_show.html">Delete Show</a><li>
-              <li><a href="update_show.html">Update Show</a></li>
-              <li><a href="export.php">Export</a><li>
+              <li><a href="query.php">Search Shows</a><li>
+              <li><a href="delete_show.php">Delete Show</a><li>
+              <li><a href="insert_show.php">Insert Show</a></li>
+              <li><a href="update_show.php">Update Show</a></li>
               
             </ul>
             </nav>

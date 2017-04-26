@@ -53,33 +53,37 @@ $time = isset($_POST["time"]) ? mysqli_real_escape_string($con, $_POST["time"]) 
 					<div id="main" style="padding: 20px;height: 100px">
 						<?php
 							$sql1 = $con->prepare("INSERT INTO shows VALUES(?, ?, ?)");
-							$sql1->bind_param("sss", $date, $time, $venue_name);
-							$query1 = $sql1->execute();
-							
-							$sql2 = $con->prepare("INSERT INTO play VALUES(?, ?, ?, ?)");
-							$sql2->bind_param("ssss", $performer_name, $date, $time, $venue_name);
-							$query2 = $sql2->execute();
+							if($sql1){
+								$sql1->bind_param("sss", $date, $time, $venue_name);
+								$query1 = $sql1->execute();
+								
+								$sql2 = $con->prepare("INSERT INTO play VALUES(?, ?, ?, ?)");
+								$sql2->bind_param("ssss", $performer_name, $date, $time, $venue_name);
+								$query2 = $sql2->execute();
 
-							if ($query1 == TRUE && $query2 == TRUE) {
-  								echo "New show successfully added <br>";
-							} else if($query1 == TRUE && $query2 == FALSE){
-								$sql2_1 = $con->prepare("DELETE FROM shows WHERE date_played = ? AND doors_open = ? AND venue_name = ?");
-								$sql2_1->bind_param("sss", $date, $time, $venue_name);
-								$sql2_1->execute();
-								echo "Could not find the given artist" . "<br>";
-							}else {
-								echo "Could not add show" . "<br>"; 
-							}
-
-							if(isset($tour_name) && $tour_name != ""){
-								$sql3 = $con->prepare("INSERT INTO contain VALUE(?, ?, ?, ?)");
-								$sql3->bind_param("ssss", $tour_name, $date, $time, $venue_name);
-								$query3 = $sql3->execute();
-								if($query3 == TRUE){
-									echo "Show added to tour." . "<br>";
-								}else{
-									echo "Invalid Tour." . "<br>";
+								if ($query1 == TRUE && $query2 == TRUE) {
+	  								echo "New show successfully added <br>";
+								} else if($query1 == TRUE && $query2 == FALSE){
+									$sql2_1 = $con->prepare("DELETE FROM shows WHERE date_played = ? AND doors_open = ? AND venue_name = ?");
+									$sql2_1->bind_param("sss", $date, $time, $venue_name);
+									$sql2_1->execute();
+									echo "Could not find the given artist" . "<br>";
+								}else {
+									echo "Could not add show" . "<br>"; 
 								}
+
+								if(isset($tour_name) && $tour_name != ""){
+									$sql3 = $con->prepare("INSERT INTO contain VALUE(?, ?, ?, ?)");
+									$sql3->bind_param("ssss", $tour_name, $date, $time, $venue_name);
+									$query3 = $sql3->execute();
+									if($query3 == TRUE){
+										echo "Show added to tour." . "<br>";
+									}else{
+										echo "Invalid Tour." . "<br>";
+									}
+								}
+							}else{
+								echo "Do not have proper credentials for insert";
 							}
 
 							mysqli_close($con);

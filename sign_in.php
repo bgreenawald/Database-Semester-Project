@@ -23,6 +23,12 @@
 					<header id="header">
 						<h1>Sign In</h1>
 						<p>Enter Your Username and Password</p>
+						<?php
+						if(isset($_REQUEST['msg'])){
+							echo $_REQUEST['msg'];
+						}
+
+					?>
 					</header>
 
 				<!-- Main -->

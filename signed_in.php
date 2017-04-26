@@ -12,7 +12,8 @@ if (mysqli_connect_errno())
   {
   //$error = "Failed to connect to MySQL: " . mysqli_connect_error();
   	mysqli_close($con);
-  	header('Location: sign_in.html');
+  	$message = urlencode("Sign in failed, please enter valid credentials");
+  	header('Location: sign_in.php?msg='.$message);
   	exit();
   }
   else {

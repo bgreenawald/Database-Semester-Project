@@ -40,8 +40,8 @@ $time_new = isset($_POST["time_new"]) ? mysqli_real_escape_string($conn, $_POST[
 		<!-- Wrapper -->
 			<div id="wrapper">
 		        <ul class="actions">
-		          <li><a href="query.php" class="button special">Search the Database</a></li>
 		          <li><a href="index.html" class="button">Home</a></li>
+		          <li><a href="update_show.php" class="button">Back To Update</a></li>
 		        </ul>
 
 				<!-- Main -->
@@ -60,14 +60,18 @@ $time_new = isset($_POST["time_new"]) ? mysqli_real_escape_string($conn, $_POST[
 							else{
 								$sql2->close();
 								$sql1 = $conn->prepare("UPDATE shows SET doors_open = ? WHERE date_played = ? AND doors_open = ? AND venue_name = ?");
-								$sql1->bind_param("ssss", $time_new, $date, $time, $venue_name);
-								$query1 = $sql1->execute();
-								if ($query1 == TRUE) {
-	  								echo "The show was successfully updated";
-								}else {
-								    echo "Problem updating the show";
-								    echo $sql1->error;
+								if($sql1){
+									$sql1->bind_param("ssss", $time_new, $date, $time, $venue_name);
+									$query1 = $sql1->execute();
+									if ($query1 == TRUE) {
+		  								echo "The show was successfully updated";
+									}else {
+									    echo "Problem updating the show";
+									}
+								}else{
+									echo "Do not have credentials to update";
 								}
+
 							}
 							mysqli_close($conn);
 

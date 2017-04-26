@@ -39,8 +39,8 @@ $time = isset($_POST["time"]) ? mysqli_real_escape_string($conn, $_POST["time"])
 		<!-- Wrapper -->
 			<div id="wrapper">
 		        <ul class="actions">
-		          <li><a href="query.php" class="button special">Search the Database</a></li>
 		          <li><a href="index.html" class="button">Home</a></li>
+		          <li><a href="delete_show.php" class="button">Back To Delete</a></li>
 		        </ul>
 
 				<!-- Main -->
@@ -49,6 +49,7 @@ $time = isset($_POST["time"]) ? mysqli_real_escape_string($conn, $_POST["time"])
 							
 
 							$sql2 = $conn->prepare("SELECT venue_name FROM shows WHERE date_played = ? AND doors_open = ? AND venue_name = ?");
+							
 							$sql2->bind_param("sss", $date, $time, $venue_name);
 							$sql2->execute();
 							$sql2->bind_result($res);
@@ -59,14 +60,19 @@ $time = isset($_POST["time"]) ? mysqli_real_escape_string($conn, $_POST["time"])
 							else{
 								$sql2->close();
 								$sql1 = $conn->prepare("DELETE FROM shows WHERE date_played = ? AND doors_open = ? AND venue_name = ?");
-								$sql1->bind_param("sss", $date, $time, $venue_name);
-								$query1 = $sql1->execute();
-								if ($query1 == TRUE) {
-	  								echo "The show was successfully deleted";
-								}else {
-								    echo "Error: " . $sql1->error;
+								if($sql1){
+									$sql1->bind_param("sss", $date, $time, $venue_name);
+									$query1 = $sql1->execute();
+									if ($query1 == TRUE) {
+		  								echo "The show was successfully deleted";
+									}else {
+									    echo "Do not have the proper credentials for delete";
+									}
+								}else{
+									echo "Do not have proper credentials for delete";
 								}
 							}
+							
 							mysqli_close($conn);
 
 
