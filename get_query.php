@@ -63,17 +63,29 @@ if(isset($results)){
 
       if($result2 != NULL){
         $res = mysqli_fetch_array($result2);
-        $percent_tickets = $res['percent_tickets'];
+        $percent_tickets = $res['percent_tickets']*100;
       }else{
         $percent_tickets = "None found";
       }
+
+      if($percent_tickets == 100){
+        $isLow = "Sold Out";
+      }else if($percent_tickets > 50){
+        $isLow = "Tickets Low";
+      }else{
+        $isLow = "Tickets Available";
+      }
+
+
+
+
       echo "<tr>";
       echo "<td>" . $row['performer_name'] . "</td>";
       echo "<td>" . $row['genre'] . "</td>";
       echo "<td>" . $row['venue_name'] . "</td>";
       echo "<td>" . $row['date_played'] . "</td>";
       echo "<td>" . $row['doors_open'] . "</td>";
-      echo "<td>" . $percent_tickets . "</td>";
+      echo "<td>" . $isLow . "</td>";
       echo "</tr>";
   }
 echo "</table>";

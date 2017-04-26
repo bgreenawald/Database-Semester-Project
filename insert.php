@@ -40,17 +40,17 @@ $time = isset($_POST["time"]) ? mysqli_real_escape_string($con, $_POST["time"]) 
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 	</head>
-	<body>
+	<body >
 
 		<!-- Wrapper -->
-			<div id="wrapper">
-		        <ul class="actions">
-		          <li><a href="query.php" class="button special">Search the Database</a></li>
+			<div id="wrapper" style="padding: 20px;height: 1000px" >
+		        <ul class="actions" >
+		          <li><a href="insert_show.php" class="button special">Back to Insert</a></li>
 		          <li><a href="index.html" class="button">Home</a></li>
 		        </ul>
 
 				<!-- Main -->
-					<div id="main">
+					<div id="main" style="padding: 20px;height: 100px">
 						<?php
 							$sql1 = $con->prepare("INSERT INTO shows VALUES(?, ?, ?)");
 							$sql1->bind_param("sss", $date, $time, $venue_name);
@@ -78,7 +78,7 @@ $time = isset($_POST["time"]) ? mysqli_real_escape_string($con, $_POST["time"]) 
 								if($query3 == TRUE){
 									echo "Show added to tour." . "<br>";
 								}else{
-									echo "Could not add show to tour." . "<br>";
+									echo "Invalid Tour." . "<br>";
 								}
 							}
 
