@@ -21,7 +21,7 @@ if (mysqli_connect_errno())
 $q = mysqli_real_escape_string($con, $_GET['q']);
 $q = "%{$q}%";
 
-$sql1 = $con->prepare("SELECT * FROM performer NATURAL JOIN play NATURAL JOIN shows NATURAL JOIN venue NATURAL JOIN is_in NATURAL JOIN location WHERE performer.performer_name LIKE ?");
+$sql1 = $con->prepare("SELECT * FROM show_view WHERE performer_name LIKE ?");
 
 if($sql1){
   $sql1->bind_param("s", $q);
@@ -87,7 +87,7 @@ if($sql1){
     echo "</table>";
   }
 }else{
-  echo "Invalid Credentials to Search";h
+  echo "Invalid Credentials to Search";
 }
 mysqli_close($con);
 ?>

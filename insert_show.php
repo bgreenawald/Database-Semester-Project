@@ -8,7 +8,7 @@ $USERNAME = $_SESSION["username"];
 $PASSWORD = $_SESSION["password"];
 
 if (!isset($USERNAME) || !isset($PASSWORD)) {
-	header("Location: sign_in.html");
+	header("Location: sign_in.php");
 	die();
 }
 

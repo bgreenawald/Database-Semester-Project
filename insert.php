@@ -3,7 +3,7 @@ session_start();
 
 //redirect if not logged in
 if (!isset($_SESSION["username"]) || !isset($_SESSION["password"])) {
-	header("Location: sign_in.html");
+	header("Location: sign_in.php");
 	die();
 }
 

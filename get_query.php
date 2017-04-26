@@ -24,7 +24,7 @@ if (mysqli_connect_errno())
 
 
 
-$sql1 = $con->prepare("SELECT * FROM performer NATURAL JOIN play NATURAL JOIN shows NATURAL JOIN venue NATURAL JOIN is_in NATURAL JOIN location WHERE zip_code LIKE ?");
+$sql1 = $con->prepare("SELECT * FROM show_view WHERE zip_code LIKE ?");
 if($sql1){
   $sql1->bind_param("s", $q);
   $sql1->execute();
@@ -89,10 +89,10 @@ if($sql1){
         echo "</tr>";
     }
   echo "</table>";
-  }else{
+  }
+}else{
     echo "Invalid credentials for search";
   }
-}
 mysqli_close($con);
 ?>
 

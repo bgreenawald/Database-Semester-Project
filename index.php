@@ -37,7 +37,7 @@
 				<!-- Nav -->
 					<nav id="nav">
 						<ul>
-							<li><a href="sign_in.html">Sign In</a></li>
+							<li><a href="sign_in.php">Sign In</a></li>
 							<li><a href="query.php">Search Shows</a><li>
 							<li><a href="delete_show.php">Delete Show</a><li>
 							<li><a href="insert_show.php">Insert Show</a></li>
@@ -159,7 +159,7 @@
 								<footer class="major">
 									<ul class="actions">
                     						<?php if(!isset($_SESSION["username"]) || !isset($_SESSION["password"])) : ?>
-                    							<li><a href="sign_in.html" class="button special">Log In</a></li>
+                    							<li><a href="sign_in.php" class="button special">Log In</a></li>
 											<?php else : ?>
     											<li><a href="sign_out.php" class="button special">Log Out</a></li>
 											<?php endif; ?>
