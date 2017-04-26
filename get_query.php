@@ -1,6 +1,7 @@
 <?php
 
 
+
 session_start();
 $SERVER = 'stardock.cs.virginia.edu';
 $DATABASE = 'cs4750s17bhg5yd';
@@ -8,6 +9,8 @@ $USERNAME = $_SESSION["username"];
 $PASSWORD = $_SESSION["password"];
 
 $con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
+$q = mysqli_real_escape_string($con, $_GET['q']);
+$q = "%{$q}%";
 
 
 // Check connection
@@ -19,8 +22,7 @@ if (mysqli_connect_errno())
     
   }
 
-$q = mysqli_real_escape_string($con, $_GET['q']);
-$q = "%{$q}%";
+
 
 $sql1 = $con->prepare("SELECT * FROM performer NATURAL JOIN play NATURAL JOIN shows NATURAL JOIN venue NATURAL JOIN is_in NATURAL JOIN location WHERE zip_code LIKE ?");
 
@@ -61,17 +63,29 @@ if(isset($results)){
 
       if($result2 != NULL){
         $res = mysqli_fetch_array($result2);
-        $percent_tickets = $res['percent_tickets'];
+        $percent_tickets = $res['percent_tickets']*100;
       }else{
         $percent_tickets = "None found";
       }
+
+      if($percent_tickets > 50){
+        $isLow = "Tickets Low";
+      }else if($percent_tickets == 100){
+        $isLow = "Sold Out";
+      }else{
+        $isLow = "Tickets Available";
+      }
+
+
+
+
       echo "<tr>";
       echo "<td>" . $row['performer_name'] . "</td>";
       echo "<td>" . $row['genre'] . "</td>";
       echo "<td>" . $row['venue_name'] . "</td>";
       echo "<td>" . $row['date_played'] . "</td>";
       echo "<td>" . $row['doors_open'] . "</td>";
-      echo "<td>" . $percent_tickets . "</td>";
+      echo "<td>" . $isLow . "</td>";
       echo "</tr>";
   }
 echo "</table>";

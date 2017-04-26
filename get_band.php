@@ -1,24 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-table, td, th {
-    border: 1px solid black;
-    padding: 5px;
-}
-
-th {text-align: left;}
-</style>
-</head>
-<body>
-
 <?php
-
 
 session_start();
 $SERVER = 'stardock.cs.virginia.edu';
@@ -80,22 +60,57 @@ if(isset($results)){
 
       if($result2 != NULL){
         $res = mysqli_fetch_array($result2);
-        $percent_tickets = $res['percent_tickets'];
+        $percent_tickets = $res['percent_tickets']*100;
       }else{
         $percent_tickets = "None found";
       }
+
+      if($percent_tickets > 50){
+        $isLow = "Tickets Low";
+      }else if($percent_tickets == 100){
+        $isLow = "Sold Out";
+      }else{
+        $isLow = "Tickets Available";
+      }
+
+
       echo "<tr>";
       echo "<td>" . $row['performer_name'] . "</td>";
       echo "<td>" . $row['genre'] . "</td>";
       echo "<td>" . $row['venue_name'] . "</td>";
       echo "<td>" . $row['date_played'] . "</td>";
       echo "<td>" . $row['doors_open'] . "</td>";
-      echo "<td>" . $percent_tickets . "</td>";
+      echo "<td>" . $isLow . "</td>";
       echo "</tr>";
   }
   echo "</table>";
 }
 mysqli_close($con);
 ?>
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, td, th {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+th {text-align: left;}
+</style>
+</head>
+<body>
+
+
 </body>
 </html>
