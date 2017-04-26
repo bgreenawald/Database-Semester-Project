@@ -68,10 +68,10 @@ if(isset($results)){
         $percent_tickets = "None found";
       }
 
-      if($percent_tickets > 50){
-        $isLow = "Tickets Low";
-      }else if($percent_tickets == 100){
+      if($percent_tickets == 100){
         $isLow = "Sold Out";
+      }else if($percent_tickets > 50){
+        $isLow = "Tickets Low";
       }else{
         $isLow = "Tickets Available";
       }

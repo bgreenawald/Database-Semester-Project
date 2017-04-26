@@ -59,7 +59,7 @@ header('Location: index.html');
               if(isset($error)){
                 echo $error;
               }else{
-                echo "Connection Succesfull";
+                echo "Connection Successful";
               }
 
              ?>
