@@ -21,7 +21,7 @@ $PASSWORD = $_SESSION["password"];
 	
 
 <head>
-	<title>Elements - Stellar by HTML5 UP</title>
+	<title>Insert Show</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -41,7 +41,15 @@ $PASSWORD = $_SESSION["password"];
 			<h1>Add a Show</h1>
 			<br>
 		</header>
-
+		<nav id="nav">
+						<ul>
+							<li><a href="index.html">Home</a></li>
+							
+							<!--<li><a href="#second">Second Section</a></li>-->
+							<li><a href="delete_show.html">Delete Show</a><li>
+							<li><a href="export.php">Export</a><li>
+						</ul>
+					</nav>
 		<!-- Main -->
 		<div id="main">
 
