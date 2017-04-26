@@ -1,11 +1,27 @@
+<?php
 
+session_start();
+if (!isset($_SESSION["username"]) || !isset($_SESSION["password"])) {
+	header("Location: sign_in.html");
+	die();
+}
+
+$SERVER = 'stardock.cs.virginia.edu';
+$DATABASE = 'cs4750s17bhg5yd';
+$USERNAME = $_SESSION["username"];
+$PASSWORD = $_SESSION["password"];
+
+?>
 
 
 <!DOCTYPE HTML>
 
 <html>
+
+	
+
 <head>
-	<title>Insert Show</title>
+	<title>Elements - Stellar by HTML5 UP</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -45,7 +61,7 @@
 							<div class="12u 12u$(medium)" style="padding-top: 0px">
 								<input type="text" name="venue-name" id="venue-name" required />
 							</div>
-							<h4>Tour (must be existing)</h4>
+							<h4>Name of Tour (if part of a tour)</h4>
 							<div class="12u 12u$(xsmall)" style="padding-top: 0px">
 								<input type="text" name="tour-name" id="tour-name" />
 							</div>

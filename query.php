@@ -1,13 +1,15 @@
 <?php
 session_start();
+if (!isset($_SESSION["username"]) || !isset($_SESSION["password"])) {
+	header("Location: sign_in.html");
+	die();
+}
+
 $SERVER = 'stardock.cs.virginia.edu';
 $DATABASE = 'cs4750s17bhg5yd';
 $USERNAME = $_SESSION["username"];
 $PASSWORD = $_SESSION["password"];
-if (!isset($USERNAME) || !isset($PASSWORD)) {
-	header("Location: sign_in.html");
-	die();
-}
+
 
 $con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
 
@@ -20,15 +22,6 @@ if (mysqli_connect_errno())
     
   }
 
-$idletime=360;//after 60 seconds the user gets logged out
-if (time()-$_SESSION['timestamp']>$idletime){
-    session_destroy();
-    session_unset();
-}else{
-    $_SESSION['timestamp']=time();
-}
-//on session creation
-$_SESSION['timestamp']=time();
  ?>
 
 <!DOCTYPE HTML>
