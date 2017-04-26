@@ -15,6 +15,7 @@ $conn = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
 $venue_name = isset($_POST["venue-name"]) ? mysqli_real_escape_string($conn, $_POST["venue-name"]) : "";
 $date = isset($_POST["date"]) ? mysqli_real_escape_string($conn, $_POST["date"]) : "";
 $time = isset($_POST["time"]) ? mysqli_real_escape_string($conn, $_POST["time"]) : "";
+$date_new = isset($_POST["date_new"]) ? mysqli_real_escape_string($conn, $_POST["date_new"]) : "";
 $time_new = isset($_POST["time_new"]) ? mysqli_real_escape_string($conn, $_POST["time_new"]) : "";
 
 ?>
@@ -37,15 +38,25 @@ $time_new = isset($_POST["time_new"]) ? mysqli_real_escape_string($conn, $_POST[
 	</head>
 	<body>
 
-		<!-- Wrapper -->
-			<div id="wrapper">
-		        <ul class="actions">
-		          <li><a href="index.php" class="button">Home</a></li>
-		          <li><a href="update_show.php" class="button">Back To Update</a></li>
-		        </ul>
+<!-- Wrapper -->
+			<div id="wrapper" style="padding-bottom: 150px">
+
+				<!-- Header -->
+					<header id="header">
+						<center>
+					        <ul class="actions">
+					          <li><a href="index.php" class="button">Home</a></li>
+					          <li><a href="update_show.php" class="button">Back To Update</a></li>
+					        </ul>
+					        </center>
+					</header>
 
 				<!-- Main -->
-					<div id="main">
+					<div id="main" >
+
+            <!-- Sign In Form-->
+            <section style="padding: 20px;height: 300px">
+              <center>
 						<?php
 							
 
@@ -59,9 +70,9 @@ $time_new = isset($_POST["time_new"]) ? mysqli_real_escape_string($conn, $_POST[
 							}
 							else{
 								$sql2->close();
-								$sql1 = $conn->prepare("UPDATE shows SET doors_open = ? WHERE date_played = ? AND doors_open = ? AND venue_name = ?");
+								$sql1 = $conn->prepare("UPDATE shows SET doors_open = ?, date_played = ? WHERE date_played = ? AND doors_open = ? AND venue_name = ?");
 								if($sql1){
-									$sql1->bind_param("ssss", $time_new, $date, $time, $venue_name);
+									$sql1->bind_param("sssss", $time_new, $date_new, $date, $time, $venue_name);
 									$query1 = $sql1->execute();
 									if ($query1 == TRUE) {
 		  								echo "The show was successfully updated";
@@ -74,13 +85,14 @@ $time_new = isset($_POST["time_new"]) ? mysqli_real_escape_string($conn, $_POST[
 
 							}
 							mysqli_close($conn);
-
-
 						?>
+						</center>
+            			</section>
 					</div>
-
+          			<footer id="footer">
+						<p class="copyright">&copy; Live Music DB: <a href="https://html5up.net">HTML5 UP</a>.</p>
+					</footer>
 			</div>
-
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrollex.min.js"></script>

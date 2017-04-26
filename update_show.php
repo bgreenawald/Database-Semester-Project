@@ -73,9 +73,14 @@ mysqli_close($conn);
 							<div class="12u 12u$(medium)" style="padding-top: 0px">
 								<input type="text" name="venue-name" id="venue-name" placeholder="Venue" required />
 							</div>
-							<h4>Date</h4>
+							<h4>Old Date</h4>
 							<div class="12u 12u$(xsmall)" style="padding-top: 0px">
 								<input type="date" name="date" id="date" required />
+							</div>
+
+							<h4>New Date (Enter old date if unchanged)</h4>
+							<div class="12u 12u$(xsmall)" style="padding-top: 0px">
+								<input type="date" name="date_new" id="date_new" required/>
 							</div>
 
 							<h4>Old Start Time</h4>
@@ -83,7 +88,7 @@ mysqli_close($conn);
 								<input type="time" name="time" id="time" required/>
 							</div>
 
-							<h4>New Start Time</h4>
+							<h4>New Start Time (Enter old time if unchanged)</h4>
 							<div class="12u 12u$(xsmall)" style="padding-top: 0px">
 								<input type="time" name="time_new" id="time_new" required/>
 							</div>

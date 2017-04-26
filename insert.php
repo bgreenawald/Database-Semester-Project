@@ -42,15 +42,26 @@ $time = isset($_POST["time"]) ? mysqli_real_escape_string($con, $_POST["time"]) 
 	</head>
 	<body >
 
-		<!-- Wrapper -->
-			<div id="wrapper" style="padding: 20px;height: 1000px" >
-		        <ul class="actions" >
-		          <li><a href="insert_show.php" class="button special">Back to Insert</a></li>
-		          <li><a href="index.php" class="button">Home</a></li>
-		        </ul>
+
+<!-- Wrapper -->
+			<div id="wrapper" style="padding-bottom: 150px">
+
+				<!-- Header -->
+					<header id="header">
+						<center>
+					        <ul class="actions">
+					          <li><a href="index.php" class="button">Home</a></li>
+					          <li><a href="insert_show.php" class="button">Back To Insert</a></li>
+					        </ul>
+					        </center>
+					</header>
 
 				<!-- Main -->
-					<div id="main" style="padding: 20px;height: 100px">
+					<div id="main" >
+
+            <!-- Sign In Form-->
+            <section style="padding: 20px;height: 300px">
+              <center>
 						<?php
 							$sql1 = $con->prepare("INSERT INTO shows VALUES(?, ?, ?)");
 							if($sql1){
@@ -79,7 +90,7 @@ $time = isset($_POST["time"]) ? mysqli_real_escape_string($con, $_POST["time"]) 
 									if($query3 == TRUE){
 										echo "Show added to tour." . "<br>";
 									}else{
-										echo "Invalid Tour." . "<br>";
+										echo "Tour name not found or tour date out of range." . "<br>";
 									}
 								}
 							}else{
@@ -90,10 +101,13 @@ $time = isset($_POST["time"]) ? mysqli_real_escape_string($con, $_POST["time"]) 
 
 
 						?>
+						</center>
+            			</section>
 					</div>
-
+          			<footer id="footer">
+						<p class="copyright">&copy; Live Music DB: <a href="https://html5up.net">HTML5 UP</a>.</p>
+					</footer>
 			</div>
-
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrollex.min.js"></script>

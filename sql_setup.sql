@@ -13,17 +13,6 @@ CREATE TABLE IF NOT EXISTS tickets (
   PRIMARY KEY(ticket_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
-
-CREATE TABLE IF NOT EXISTS shows (
-  date_played date NOT NULL,
-  doors_open time NOT NULL,
-  venue_name varchar(30) NOT NULL,
-  INDEX(date_played, doors_open),
-  PRIMARY KEY(date_played, doors_open,venue_name),
-  FOREIGN KEY(venue_name) REFERENCES venue(venue_name) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
 CREATE TABLE IF NOT EXISTS performer(
   performer_name varchar(50) NOT NULL,
   number_of_members int NOT NULL,
@@ -48,6 +37,17 @@ CREATE TABLE IF NOT EXISTS location(
 	city  varchar(30) NOT NULL,
 	PRIMARY KEY(zip_code)
 );
+
+--Create table for weak entity sets
+CREATE TABLE IF NOT EXISTS shows (
+  date_played date NOT NULL,
+  doors_open time NOT NULL,
+  venue_name varchar(30) NOT NULL,
+  INDEX(date_played, doors_open),
+  PRIMARY KEY(date_played, doors_open,venue_name),
+  FOREIGN KEY(venue_name) REFERENCES venue(venue_name) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
 --Create tables for the relationships--
 
