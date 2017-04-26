@@ -73,7 +73,7 @@ $time = isset($_POST["time"]) ? mysqli_real_escape_string($con, $_POST["time"]) 
 								}
 
 								if(isset($tour_name) && $tour_name != ""){
-									$sql3 = $con->prepare("INSERT INTO contain VALUE(?, ?, ?, ?)");
+									$sql3 = $con->prepare("INSERT INTO contain VALUES(?, ?, ?, ?)");
 									$sql3->bind_param("ssss", $tour_name, $date, $time, $venue_name);
 									$query3 = $sql3->execute();
 									if($query3 == TRUE){
