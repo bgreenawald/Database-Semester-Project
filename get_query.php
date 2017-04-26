@@ -1,6 +1,7 @@
 <?php
 
 
+
 session_start();
 $SERVER = 'stardock.cs.virginia.edu';
 $DATABASE = 'cs4750s17bhg5yd';
@@ -8,6 +9,8 @@ $USERNAME = $_SESSION["username"];
 $PASSWORD = $_SESSION["password"];
 
 $con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
+$q = mysqli_real_escape_string($con, $_GET['q']);
+$q = "%{$q}%";
 
 
 // Check connection
@@ -19,8 +22,7 @@ if (mysqli_connect_errno())
     
   }
 
-$q = mysqli_real_escape_string($con, $_GET['q']);
-$q = "%{$q}%";
+
 
 $sql1 = $con->prepare("SELECT * FROM performer NATURAL JOIN play NATURAL JOIN shows NATURAL JOIN venue NATURAL JOIN is_in NATURAL JOIN location WHERE zip_code LIKE ?");
 
