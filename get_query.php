@@ -42,38 +42,41 @@ while ($sql1->fetch()) {
   $results[] = $x;
 }
 
-echo "<table>
-<tr>
-<th>Performer Name</th>
-<th>Genre</th>
-<th>Venue Name</th>
-<th>Date</th>
-<th>Start Time</th>
-<th>Percent Tickets</th>
-</tr>";
-foreach($results as $row) {
-    $sql2 = "CALL GET_PERCENT_TICKETS_SOLD('$row[date_played]', '$row[doors_open]', '$row[venue_name]', @p3)";
-    $result2 = mysqli_query($con, $sql2);
+if(isset($results)){
+  echo "<table>
+  <tr>
+  <th>Performer Name</th>
+  <th>Genre</th>
+  <th>Venue Name</th>
+  <th>Date</th>
+  <th>Start Time</th>
+  <th>Percent Tickets</th>
+  </tr>";
+  foreach($results as $row) {
+      $sql2 = "CALL GET_PERCENT_TICKETS_SOLD('$row[date_played]', '$row[doors_open]', '$row[venue_name]', @p3)";
+      $result2 = mysqli_query($con, $sql2);
 
-    mysqli_close($con);
-    $con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
+      mysqli_close($con);
+      $con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
 
-    if($result2 != NULL){
-      $res = mysqli_fetch_array($result2);
-      $percent_tickets = $res['percent_tickets'];
-    }else{
-      $percent_tickets = "None found";
-    }
-    echo "<tr>";
-    echo "<td>" . $row['performer_name'] . "</td>";
-    echo "<td>" . $row['genre'] . "</td>";
-    echo "<td>" . $row['venue_name'] . "</td>";
-    echo "<td>" . $row['date_played'] . "</td>";
-    echo "<td>" . $row['doors_open'] . "</td>";
-    echo "<td>" . $percent_tickets . "</td>";
-    echo "</tr>";
-}
+      if($result2 != NULL){
+        $res = mysqli_fetch_array($result2);
+        $percent_tickets = $res['percent_tickets'];
+      }else{
+        $percent_tickets = "None found";
+      }
+      echo "<tr>";
+      echo "<td>" . $row['performer_name'] . "</td>";
+      echo "<td>" . $row['genre'] . "</td>";
+      echo "<td>" . $row['venue_name'] . "</td>";
+      echo "<td>" . $row['date_played'] . "</td>";
+      echo "<td>" . $row['doors_open'] . "</td>";
+      echo "<td>" . $percent_tickets . "</td>";
+      echo "</tr>";
+  }
 echo "</table>";
+}
+
 mysqli_close($con);
 ?>
 
