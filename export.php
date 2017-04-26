@@ -41,7 +41,7 @@ foreach($tables as $name){
 
 
 echo json_encode($emparray);
-echo PHP_EOL;
+echo "\r\n";
 }
 
 mysqli_close($con);
