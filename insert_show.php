@@ -48,6 +48,7 @@ $PASSWORD = $_SESSION["password"];
 							<!--<li><a href="#second">Second Section</a></li>-->
 							<li><a href="delete_show.html">Delete Show</a><li>
 							<li><a href="export.php">Export</a><li>
+							<li><a href="query.php">Search Shows</a><li>
 						</ul>
 					</nav>
 		<!-- Main -->
